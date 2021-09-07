@@ -1,0 +1,31 @@
+- hosts: web
+  tasks:
+    - name: Installing Nginx
+      apt:
+        name: nginx
+        state: latest
+        update_cache: yes
+
+    - name: Starting nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: transfer the script
+      copy: src=script_log.py dest=/opt/script_log.py mode=0777
+
+    - name: Execute the script
+      command: python3 /opt/script_log.py
+
+    - name: transfer .service
+      copy: src=script_log.service dest=/usr/lib/systemd/system/script_log.service mode=0777
+
+    - name: transfer .timer
+      copy: src=script_log.timer dest=/usr/lib/systemd/system/script_log.timer mode=0777
+
+    - name: setting timer on
+      systemd:
+        name: script_log.timer
+        state: started
+        enabled: yes

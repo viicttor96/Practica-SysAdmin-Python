@@ -1,0 +1,9 @@
+[Unit]
+Description=Run script_log.py every 15mins
+
+[Timer]
+OnCalendar=*:0,15,30,45
+
+[Install]
+WantedBy=timer.target
+

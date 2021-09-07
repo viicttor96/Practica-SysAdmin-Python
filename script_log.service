@@ -1,0 +1,7 @@
+[Unit]
+Description=Generate nginx access log report
+
+[Service]
+Type=oneshot
+ExecStart=/usr/bin/python3 /opt/script_log.py
+
